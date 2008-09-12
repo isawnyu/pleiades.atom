@@ -1,0 +1,55 @@
+Test serialization of PlaceContainer to KML
+===========================================
+
+    >>> from Products.PloneTestCase.setup import portal_owner, default_password
+    >>> r = http(r"""
+    ... GET /plone/places-topic/@@atom-feed HTTP/1.1
+    ... Authorization: Basic %s:%s
+    ... """ % (portal_owner, default_password), handle_errors=False)
+    >>> r.getStatus()
+    200
+    >>> r.getHeader('Content-Type')
+    'application/atom+xml'
+    >>> print r.getBody()
+    <?xml version="1.0" encoding="utf-8"?>
+    <feed xmlns="http://www.w3.org/2005/Atom"
+          xmlns:georss="http://www.georss.org/georss"
+          xmlns:gml="http://www.opengis.net/gml">
+    <BLANKLINE>
+    <BLANKLINE>
+      <title>Large</title>
+      <link href="http://localhost/plone/places-topic/@@atom-feed"
+            type="application/atom+xml" rel="self"/>
+      <link href="http://localhost/plone/places-topic"
+            type="text/html" rel="alternate"/>
+    <BLANKLINE>
+      <updated>200...Z</updated>
+      <author>
+        <name>test_user_1_</name>
+        <uri></uri>
+        <email></email>
+      </author>
+      <id>urn:uuid:...</id>
+    <BLANKLINE>
+      <entry>
+        <title>Foo</title>
+        <link href="http://localhost/plone/places/a"
+              type="text/html" rel="alternate"/>
+        <id>urn:uuid:...</id>
+        <updated>200...Z</updated>
+        <summary>A Place</summary>
+    <BLANKLINE>
+        <georss:where>
+          <gml:Point>
+            <gml:pos>0.000000 0.000000</gml:pos>
+          </gml:Point>
+        </georss:where>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+      </entry>
+    <BLANKLINE>
+    </feed>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
