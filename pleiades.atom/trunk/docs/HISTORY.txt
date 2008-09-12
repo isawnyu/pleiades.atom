@@ -1,0 +1,9 @@
+Changelog for pleiades.atom
+
+    (name of developer listed in brackets)
+
+pleiades.atom - 0.1 Unreleased
+
+    - Initial package structure.
+      [zopeskel]
+

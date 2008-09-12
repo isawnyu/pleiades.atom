@@ -1,0 +1,33 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:five="http://namespaces.zope.org/five"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="pleiades.atom">
+
+  <include package="zgeo.plone.atom"/>
+
+  <five:implements
+    class="Products.PleiadesEntity.content.Feature.Feature"
+    interface="zope.dublincore.interfaces.ICMFDublinCore"
+    />
+
+  <five:implements
+    class="Products.PleiadesEntity.content.Place.Place"
+    interface="zope.dublincore.interfaces.ICMFDublinCore"
+    />
+
+  <browser:page
+    for="Products.ATContentTypes.content.topic.ATTopic"
+    name="atom-feed"
+    class="zgeo.plone.atom.browser.TopicSubscriptionFeed"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    for="Products.PleiadesEntity.content.interfaces.IPlace"
+    name="atom-feed"
+    class=".browser.PlaceFeed"
+    permission="zope2.View"
+    />
+
+</configure>
