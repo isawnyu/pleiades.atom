@@ -18,14 +18,14 @@
 
   <browser:page
     for="Products.ATContentTypes.content.topic.ATTopic"
-    name="atom-feed"
+    name="atom"
     class="zgeo.plone.atom.browser.TopicSubscriptionFeed"
     permission="zope2.View"
     />
 
   <browser:page
     for="Products.PleiadesEntity.content.interfaces.IPlace"
-    name="atom-feed"
+    name="atom"
     class=".browser.PlaceFeed"
     permission="zope2.View"
     />
