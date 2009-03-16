@@ -30,4 +30,11 @@
     permission="zope2.View"
     />
 
+  <browser:page
+    for="pleiades.workspace.interfaces.IWorkspaceCollection"
+    name="atom"
+    class="zgeo.plone.atom.browser.TopicSubscriptionFeed"
+    permission="zope2.View"
+    />
+
 </configure>
