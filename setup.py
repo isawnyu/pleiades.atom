@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-version = '0.1'
+version = '0.2'
 
 setup(name='pleiades.atom',
       version=version,
@@ -26,6 +26,7 @@ setup(name='pleiades.atom',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'pleiades.workspace'
           # -*- Extra requirements: -*-
       ],
       entry_points="""
