@@ -1,27 +1,29 @@
 Test serialization of PlaceContainer to KML
 ===========================================
-
+    
     >>> from Products.PloneTestCase.setup import portal_owner, default_password
     >>> r = http(r"""
-    ... GET /plone/places-topic/@@atom-feed HTTP/1.1
+    ... GET /plone/places-topic/@@atom HTTP/1.1
     ... Authorization: Basic %s:%s
     ... """ % (portal_owner, default_password), handle_errors=False)
     >>> r.getStatus()
     200
     >>> r.getHeader('Content-Type')
     'application/atom+xml'
-    >>> print r.getBody()
+    >>> print r.getBody() # doctest: +ELLIPSIS
     <?xml version="1.0" encoding="utf-8"?>
     <feed xmlns="http://www.w3.org/2005/Atom"
           xmlns:georss="http://www.georss.org/georss"
           xmlns:gml="http://www.opengis.net/gml">
     <BLANKLINE>
     <BLANKLINE>
-      <title>Large</title>
-      <link href="http://localhost/plone/places-topic/@@atom-feed"
+      <title></title>
+      <link href="http://localhost/plone/places-topic/@@atom"
             type="application/atom+xml" rel="self"/>
       <link href="http://localhost/plone/places-topic"
             type="text/html" rel="alternate"/>
+      <link href="None" type="application/atom+xml"
+            rel="previous-archive"/>
     <BLANKLINE>
       <updated>200...Z</updated>
       <author>
@@ -32,16 +34,16 @@ Test serialization of PlaceContainer to KML
       <id>urn:uuid:...</id>
     <BLANKLINE>
       <entry>
-        <title>Foo</title>
-        <link href="http://localhost/plone/places/a"
+        <title>Ninoe</title>
+        <link href="http://localhost/plone/places/1"
               type="text/html" rel="alternate"/>
         <id>urn:uuid:...</id>
         <updated>200...Z</updated>
-        <summary>A Place</summary>
+        <summary></summary>
     <BLANKLINE>
         <georss:where>
           <gml:Point>
-            <gml:pos>0.000000 0.000000</gml:pos>
+            <gml:pos>34.769722 -86.480833</gml:pos>
           </gml:Point>
         </georss:where>
     <BLANKLINE>
