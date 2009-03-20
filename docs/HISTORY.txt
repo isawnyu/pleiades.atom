@@ -2,6 +2,10 @@ Changelog for pleiades.atom
 
     (name of developer listed in brackets)
 
+pleiades.atom - 0.2
+
+    - Improvements to test suite and compatibility with new Pleiades content model.
+    
 pleiades.atom - 0.1 Unreleased
 
     - Initial package structure.
