@@ -29,7 +29,7 @@ setup(name='pleiades.atom',
           'zope.dublincore',
           'zgeo.plone.atom'
           ],
-      test_requires=[
+      tests_require=[
           'pleiades.workspace'
           ],
       entry_points="""
