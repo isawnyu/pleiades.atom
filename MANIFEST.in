@@ -1,2 +1,1 @@
 global-include *.txt *.zcml *.GPL
-global-exclude ._* .DS*
