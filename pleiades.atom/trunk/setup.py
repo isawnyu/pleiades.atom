@@ -26,9 +26,12 @@ setup(name='pleiades.atom',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'zope.dublincore',
+          'zgeo.plone.atom'
+          ],
+      test_requires=[
           'pleiades.workspace'
-          # -*- Extra requirements: -*-
-      ],
+          ],
       entry_points="""
       # -*- Entry points: -*-
       """,
