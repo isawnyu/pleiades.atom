@@ -15,5 +15,8 @@ class PlaceFeed(SubscriptionFeed):
 
     @property
     def entries(self):
+        x = self.context.getLocations()
+        if len(x) > 0:
+            yield PleiadesEntry(self.context, self.request)
         for item in self.context.getFeatures():
             yield PleiadesEntry(item, self.request)
