@@ -1,9 +1,10 @@
-Test serialization of PlaceContainer to KML
-===========================================
+Test serialization of undetermined place to Atom
+================================================
+
 
     >>> from Products.PloneTestCase.setup import portal_owner, default_password
     >>> r = http(r"""
-    ... GET /plone/places/1/@@atom HTTP/1.1
+    ... GET /plone/places/3/@@atom HTTP/1.1
     ... Authorization: Basic %s:%s
     ... """ % (portal_owner, default_password), handle_errors=False)
     >>> r.getStatus()
@@ -18,9 +19,9 @@ Test serialization of PlaceContainer to KML
     <BLANKLINE>
     <BLANKLINE>
       <title>Ninoe</title>
-      <link href="http://localhost/plone/places/1/@@atom"
+      <link href="http://localhost/plone/places/3/@@atom"
             type="application/atom+xml" rel="self"/>
-      <link href="http://localhost/plone/places/1"
+      <link href="http://localhost/plone/places/3"
             type="text/html" rel="alternate"/>
       <link href="None" type="application/atom+xml"
             rel="previous-archive"/>
@@ -35,16 +36,20 @@ Test serialization of PlaceContainer to KML
     <BLANKLINE>
       <entry>
         <title>Ninoe</title>
-        <link href="http://localhost/plone/features/1"
+        <link href="http://localhost/plone/places/3"
               type="text/html" rel="alternate"/>
         <id>tag:atlantides.org,...</id>
         <updated>200...Z</updated>
         <summary></summary>
     <BLANKLINE>
         <georss:where>
-          <gml:Point>
-            <gml:pos>34.769722 -86.480833</gml:pos>
-          </gml:Point>
+          <gml:Polygon>
+            <gml:exterior>
+              <gml:LinearRing>
+                <gml:posList>32.000000 12.000000 33.000000 12.000000 33.000000 13.000000 32.000000 13.000000 32.000000 12.000000</gml:posList>
+              </gml:LinearRing>
+            </gml:exterior>
+          </gml:Polygon>
         </georss:where>
     <BLANKLINE>
     <BLANKLINE>

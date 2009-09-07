@@ -46,6 +46,12 @@ def test_suite():
             'place.txt', package='pleiades.atom.tests',
             test_class=PleiadesAtomFunctionalTestCase
             ),
+            
+        ztc.FunctionalDocFileSuite(
+            'place-gridsquare.txt', package='pleiades.atom.tests',
+            test_class=PleiadesAtomFunctionalTestCase
+            ),
+            
         ])
 
 if __name__ == '__main__':
