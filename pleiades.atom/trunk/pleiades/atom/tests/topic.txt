@@ -31,13 +31,13 @@ Test serialization of PlaceContainer to KML
         <uri></uri>
         <email></email>
       </author>
-      <id>urn:uuid:...</id>
+      <id>tag:atlantides.org,...</id>
     <BLANKLINE>
       <entry>
         <title>Ninoe</title>
         <link href="http://localhost/plone/places/1"
               type="text/html" rel="alternate"/>
-        <id>urn:uuid:...</id>
+        <id>tag:atlantides.org,...</id>
         <updated>200...Z</updated>
         <summary></summary>
     <BLANKLINE>
@@ -46,6 +46,34 @@ Test serialization of PlaceContainer to KML
             <gml:pos>34.769722 -86.480833</gml:pos>
           </gml:Point>
         </georss:where>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+      </entry>
+      <entry>
+        <title>Ninoe</title>
+        <link href="http://localhost/plone/places/2"
+              type="text/html" rel="alternate"/>
+        <id>tag:atlantides.org,...</id>
+        <updated>200...Z</updated>
+        <summary></summary>
+    <BLANKLINE>
+        <georss:where>
+          <gml:Point>
+            <gml:pos>34.769722 -86.480833</gml:pos>
+          </gml:Point>
+        </georss:where>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+      </entry>
+      <entry>
+        <title>Ninoe</title>
+        <link href="http://localhost/plone/places/3"
+              type="text/html" rel="alternate"/>
+        <id>tag:atlantides.org,...</id>
+        <updated>200...Z</updated>
+        <summary></summary>
     <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>

@@ -17,13 +17,6 @@
     />
 
   <browser:page
-    for="Products.ATContentTypes.content.topic.ATTopic"
-    name="atom"
-    class="zgeo.plone.atom.browser.TopicSubscriptionFeed"
-    permission="zope2.View"
-    />
-
-  <browser:page
     for="Products.PleiadesEntity.content.interfaces.IPlace"
     name="atom"
     class=".browser.PlaceFeed"
@@ -33,8 +26,15 @@
   <browser:page
     for="pleiades.workspace.interfaces.IWorkspaceCollection"
     name="atom"
-    class="zgeo.plone.atom.browser.TopicSubscriptionFeed"
+    class=".browser.TopicFeed"
     permission="zope2.View"
     />
 
+  <browser:page
+    for="Products.ATContentTypes.content.topic.ATTopic"
+    name="atom"
+    class=".browser.TopicFeed"
+    permission="zope2.View"
+    />
+    
 </configure>
