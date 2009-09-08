@@ -33,17 +33,16 @@ class PlaceFeed(Tagged, SubscriptionFeed):
     @property
     def entries(self):
         x = list(self.context.getLocations())
-        dc_coverage = self.context.getLocation()
-        if len(x) > 0 and x[0].getGeometry():
+        if len(x) > 0: # and x[0].getGeometry():
             yield PleiadesEntry(self.context, self.request)
-        if len(x) == 0 or not x[0].getGeometry():
-            if dc_coverage.startswith('http://atlantides.org/capgrids'):
-                s = dc_coverage.rstrip('/')
-                mapid, gridsquare = s.split('/')[-2:]
-                grid = Grid(mapid, gridsquare)
-                e = PleiadesEntry(self.context, self.request)
-                e.geom = IGeoreferenced(grid)
-                yield e
+        # if len(x) == 0 or not x[0].getGeometry():
+        #     if dc_coverage.startswith('http://atlantides.org/capgrids'):
+        #         s = dc_coverage.rstrip('/')
+        #         mapid, gridsquare = s.split('/')[-2:]
+        #         grid = Grid(mapid, gridsquare)
+        #         e = PleiadesEntry(self.context, self.request)
+        #         e.geom = IGeoreferenced(grid)
+        #         yield e
         for item in self.context.getFeatures():
             yield PleiadesEntry(item, self.request)
 

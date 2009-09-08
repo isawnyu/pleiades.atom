@@ -77,6 +77,16 @@ Test serialization of PlaceContainer to KML
     <BLANKLINE>
     <BLANKLINE>
     <BLANKLINE>
+        <georss:where>
+          <gml:Polygon>
+            <gml:exterior>
+              <gml:LinearRing>
+                <gml:posList>32.000000 12.000000 33.000000 12.000000 33.000000 13.000000 32.000000 13.000000 32.000000 12.000000</gml:posList>
+              </gml:LinearRing>
+            </gml:exterior>
+          </gml:Polygon>
+        </georss:where>
+    <BLANKLINE>
       </entry>
     <BLANKLINE>
     </feed>
