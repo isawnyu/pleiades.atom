@@ -4,7 +4,7 @@ Test serialization of undetermined place to Atom
 
     >>> from Products.PloneTestCase.setup import portal_owner, default_password
     >>> r = http(r"""
-    ... GET /plone/places/3/@@atom HTTP/1.1
+    ... GET /plone/places/3/atom HTTP/1.1
     ... Authorization: Basic %s:%s
     ... """ % (portal_owner, default_password), handle_errors=False)
     >>> r.getStatus()
@@ -19,7 +19,7 @@ Test serialization of undetermined place to Atom
     <BLANKLINE>
     <BLANKLINE>
       <title>Ninoe</title>
-      <link href="http://localhost/plone/places/3/@@atom"
+      <link href="http://localhost/plone/places/3/atom"
             type="application/atom+xml" rel="self"/>
       <link href="http://localhost/plone/places/3"
             type="text/html" rel="alternate"/>
