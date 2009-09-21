@@ -52,6 +52,11 @@ def test_suite():
             test_class=PleiadesAtomFunctionalTestCase
             ),
             
+        ztc.FunctionalDocFileSuite(
+            'archive.txt', package='pleiades.atom.tests',
+            test_class=PleiadesAtomFunctionalTestCase
+            ),
+            
         ])
 
 if __name__ == '__main__':

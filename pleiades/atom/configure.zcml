@@ -36,5 +36,18 @@
     class=".browser.TopicFeed"
     permission="zope2.View"
     />
+
+  <browser:page
+    for="Products.PleiadesEntity.content.interfaces.IPlaceContainer"
+    name="atom-archive-feed"
+    class=".browser.PlaceArchiveFeed"
+    permission="zope2.View"
+    />
+
+  <adapter
+    factory=".browser.archive_feed_template"
+    for=".browser.PlaceArchiveFeed"
+    name="archive-feed-template"
+    />
     
 </configure>

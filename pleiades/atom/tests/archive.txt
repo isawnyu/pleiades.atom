@@ -1,0 +1,109 @@
+Test serialization of PlaceContainer to Atom
+============================================
+    
+Publish the places
+
+    >>> from Products.CMFCore.utils import getToolByName
+    >>> wftool = getToolByName(self.portal, 'portal_workflow')
+    >>> for ob in self.places.values():
+    ...     wftool.doActionFor(ob, action='publish')
+        
+    >>> from Products.PloneTestCase.setup import portal_owner, default_password
+    >>> r = http(r"""
+    ... GET /plone/places/@@atom-archive-feed HTTP/1.1
+    ... Authorization: Basic %s:%s
+    ... """ % (portal_owner, default_password), handle_errors=False)
+    >>> r.getStatus()
+    200
+    >>> r.getHeader('Content-Type')
+    'application/atom+xml'
+    >>> print r.getBody() # doctest: +ELLIPSIS
+    <?xml version="1.0" encoding="utf-8"?>
+    <feed xmlns="http://www.w3.org/2005/Atom"
+          xmlns:georss="http://www.georss.org/georss"
+          xmlns:gml="http://www.opengis.net/gml">
+    <BLANKLINE>
+    <BLANKLINE>
+      <title>Places</title>
+      <link href="http://localhost/plone/places/@@atom-archive-feed"
+            type="application/atom+xml" rel="self"/>
+      <link href="http://localhost/plone/places"
+            type="text/html" rel="alternate"/>
+    <BLANKLINE>
+      <updated>200...Z</updated>
+      <author>
+        <name>test_user_1_</name>
+        <uri></uri>
+        <email></email>
+      </author>
+      <id>tag:atlantides.org,...</id>
+    <BLANKLINE>
+      <entry>
+        <title>Ninoe</title>
+        <link href="http://localhost/plone/places/1"
+              type="text/html" rel="alternate"/>
+        <id>tag:atlantides.org,...</id>
+        <updated>200...Z</updated>
+        <summary></summary>
+    <BLANKLINE>
+        <georss:where>
+          <gml:Point>
+            <gml:pos>34.769722 -86.480833</gml:pos>
+          </gml:Point>
+        </georss:where>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+      </entry>
+      <entry>
+        <title>Ninoe</title>
+        <link href="http://localhost/plone/places/2"
+              type="text/html" rel="alternate"/>
+        <id>tag:atlantides.org,...</id>
+        <updated>200...Z</updated>
+        <summary></summary>
+    <BLANKLINE>
+        <georss:where>
+          <gml:Point>
+            <gml:pos>34.769722 -86.480833</gml:pos>
+          </gml:Point>
+        </georss:where>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+      </entry>
+      <entry>
+        <title>Ninoe</title>
+        <link href="http://localhost/plone/places/3"
+              type="text/html" rel="alternate"/>
+        <id>tag:atlantides.org,...</id>
+        <updated>200...Z</updated>
+        <summary></summary>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+        <georss:where>
+          <gml:Polygon>
+            <gml:exterior>
+              <gml:LinearRing>
+                <gml:posList>32.000000 12.000000 33.000000 12.000000 33.000000 13.000000 32.000000 13.000000 32.000000 12.000000</gml:posList>
+              </gml:LinearRing>
+            </gml:exterior>
+          </gml:Polygon>
+        </georss:where>
+    <BLANKLINE>
+      </entry>
+    <BLANKLINE>
+    </feed>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+
+Test the next page
+
+    >>> r = http(r"""
+    ... GET /plone/places/@@atom-archive-feed?page=2 HTTP/1.1
+    ... Authorization: Basic %s:%s
+    ... """ % (portal_owner, default_password), handle_errors=False)
+    >>> r.getStatus()
+    404
