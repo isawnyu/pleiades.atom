@@ -98,13 +98,13 @@ class PlaceArchiveFeed(Tagged, FeedBase):
             }
         if self.pagenum > 1:
             links['previous-archive'] = Link(
-                '%s?start=%d' % (url, self.pagenum - 1),
+                '%s?page=%d' % (url, self.pagenum - 1),
                 rel='previous-archive',
                 type='application/atom+xml'
                 )
         if self.pagenum < self.pagecount:
             links['next-archive'] = Link(
-                '%s?start=%d' % (url, self.pagenum + 1),
+                '%s?page=%d' % (url, self.pagenum + 1),
                 rel='next-archive',
                 type='application/atom+xml'
                 )
