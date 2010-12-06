@@ -1,3 +1,4 @@
+import doctest
 import unittest
 from zope.testing import doctestunit
 from zope.component import testing
@@ -23,6 +24,10 @@ class TestCase(ptc.PloneTestCase):
         def tearDown(cls):
             pass
 
+#optionflags = (
+#    doctest.NORMALIZE_WHITESPACE |
+#    doctest.ELLIPSIS
+#    )
 
 def test_suite():
     return unittest.TestSuite([
@@ -54,7 +59,8 @@ def test_suite():
             
         ztc.FunctionalDocFileSuite(
             'archive.txt', package='pleiades.atom.tests',
-            test_class=PleiadesAtomFunctionalTestCase
+            test_class=PleiadesAtomFunctionalTestCase,
+            #optionflags=optionflags
             ),
             
         ])
