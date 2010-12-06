@@ -26,7 +26,7 @@ Test serialization of undetermined place to Atom
       <link href="None" type="application/atom+xml"
             rel="previous-archive"/>
     <BLANKLINE>
-      <updated>200...Z</updated>
+      <updated>20...Z</updated>
       <author>
         <name>test_user_1_</name>
         <uri></uri>
@@ -39,8 +39,10 @@ Test serialization of undetermined place to Atom
         <link href="http://localhost/plone/places/3"
               type="text/html" rel="alternate"/>
         <id>tag:atlantides.org,...</id>
-        <updated>200...Z</updated>
+        <updated>20...Z</updated>
         <summary></summary>
+    <BLANKLINE>
+    <BLANKLINE>
     <BLANKLINE>
         <georss:where>
           <gml:Polygon>
@@ -51,8 +53,6 @@ Test serialization of undetermined place to Atom
             </gml:exterior>
           </gml:Polygon>
         </georss:where>
-    <BLANKLINE>
-    <BLANKLINE>
     <BLANKLINE>
       </entry>
     <BLANKLINE>
