@@ -4,7 +4,63 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="pleiades.atom">
 
-  <include package="zgeo.plone.atom"/>
+  <browser:page
+    for="*"
+    name="atom-link-entry"
+    class=".browser.LinkEntry"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    for="*"
+    name="atom-entry"
+    class=".browser.LinkEntry"
+    permission="zope2.View"
+    />
+
+  <adapter
+    factory=".browser.entry_template"
+    for=".browser.LinkEntry"
+    name="template-atom-entry"
+    />
+
+  <browser:page
+    for="*"
+    name="atom-subscription-feed"
+    class=".browser.SubscriptionFeed"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    for="*"
+    name="atompub-collection"
+    class=".browser.SubscriptionFeed"
+    permission="zope2.View"
+    />
+
+  <adapter
+    factory=".browser.subscription_feed_template"
+    for=".browser.SubscriptionFeed"
+    name="template-atom-subscription-feed"
+    />
+
+  <browser:page
+    for="*"
+    name="atom-search-feed"
+    class=".browser.SearchFeed"
+    permission="zope2.View"
+    />
+
+  <adapter
+    factory=".browser.search_feed_template"
+    for=".browser.SearchFeed"
+    name="template-atom-search-feed"
+    />
+
+  <five:implements
+    class="Products.ATContentTypes.content.topic.ATTopic"
+    interface="zope.dublincore.interfaces.ICMFDublinCore"
+    />
 
   <five:implements
     class="Products.PleiadesEntity.content.Feature.Feature"
@@ -14,6 +70,20 @@
   <five:implements
     class="Products.PleiadesEntity.content.Place.Place"
     interface="zope.dublincore.interfaces.ICMFDublinCore"
+    />
+
+  <browser:page
+    for="Products.ATContentTypes.content.folder.ATBTreeFolder"
+    name="atom-syndication-feed"
+    class=".browser.SubscriptionFeed"
+    permission="zope2.View"
+    />
+
+  <browser:page
+    for="Products.ATContentTypes.content.topic.ATTopic"
+    name="atom-syndication-feed"
+    class=".browser.TopicSubscriptionFeed"
+    permission="zope2.View"
     />
 
   <browser:page
@@ -49,5 +119,22 @@
     for=".browser.PlaceArchiveFeed"
     name="archive-feed-template"
     />
+
+  <adapter
+    factory=".metadata.AtomAnnotatableAdapter"
+    provides=".interfaces.IWriteAtomMetadata"
+    trusted="true"
+    />
+
+  <class class=".metadata.AtomAnnotatableAdapter">
+    <require
+      permission="zope2.View"
+      interface=".interfaces.IAtomMetadata"
+      />
+    <require
+      permission="cmf.ManagePortal"
+      interface=".interfaces.IWritableAtomMetadata"
+      />
+  </class>
     
 </configure>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  xmlns:gml="http://www.opengis.net/gml"  
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  >
+  <tal:b 
+    condition="python:request and request.response.setHeader(
+		'Content-Type', 'application/atom+xml')" 
+    />
+
+  <title tal:content="view/title">TITLE</title>
+  <link tal:repeat="link python:view.links.values()"
+    tal:attributes="href link/href; rel link/rel; type link/type"
+    />
+  <app:collection xmlns:app="http://www.w3.org/2007/app"
+    tal:condition="view/collection_href"
+    tal:attributes="title view/title; href view/collection_href"/>
+  <updated tal:content="view/updated"/>
+  <author>
+    <name tal:content="view/author/name"/>
+    <uri tal:content="view/author/uri"/>
+    <email tal:content="view/author/email"/>
+  </author>
+  <id tal:content="view/id">ID</id>
+
+  <entry 
+    tal:repeat="entry view/entries"
+    >
+    <title tal:content="entry/title">TITLE</title>
+    <link tal:repeat="link python:entry.links.values()"
+      tal:attributes="href link/href; rel link/rel; type link/type"
+      />
+    <id tal:content="entry/id">ID</id>
+    <updated tal:content="entry/updated"/>
+    <summary tal:content="entry/summary">ABOUT</summary>
+    <tal:b condition="entry/hasPoint">
+    <georss:where>
+      <gml:Point>
+        <gml:pos tal:content="entry/coords_georss">COORDS</gml:pos>
+      </gml:Point>
+    </georss:where>
+    </tal:b>
+    <tal:b condition="entry/hasLineString">
+    <georss:where>
+      <gml:LineString>
+        <gml:posList tal:content="entry/coords_georss">COORDS</gml:posList>
+      </gml:LineString>
+    </georss:where>
+    </tal:b>
+    <tal:b condition="entry/hasPolygon">
+    <georss:where>
+      <gml:Polygon>
+        <gml:exterior>
+          <gml:LinearRing>
+            <gml:posList tal:content="entry/coords_georss">COORDS</gml:posList>
+          </gml:LinearRing>
+        </gml:exterior>
+      </gml:Polygon> 
+    </georss:where>
+    </tal:b>
+  </entry>
+
+</feed>

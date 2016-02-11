@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry
+  xmlns="http://www.w3.org/2005/Atom"
+  xmlns:georss="http://www.georss.org/georss"
+  xmlns:gml="http://www.opengis.net/gml"
+  xmlns:tal="http://xml.zope.org/namespaces/tal"
+  >
+  <tal:b 
+    condition="python:request and request.response.setHeader(
+		'Content-Type', 'application/atom+xml;type=entry')" 
+    />
+    <title tal:content="view/title">TITLE</title>
+    <link tal:repeat="link python:view.links.values()"
+      tal:attributes="href link/href; rel link/rel; type link/type"
+      />
+    <id tal:content="view/id">ID</id>
+    <updated tal:content="view/updated"/>
+    <summary tal:content="view/summary">ABOUT</summary>
+    <tal:b condition="view/hasPoint">
+    <georss:where>
+      <gml:Point>
+        <gml:pos tal:content="view/coords_georss">COORDS</gml:pos>
+      </gml:Point>
+    </georss:where>
+    </tal:b>
+    <tal:b condition="view/hasLineString">
+    <georss:where>
+      <gml:LineString>
+        <gml:posList tal:content="view/coords_georss">COORDS</gml:posList>
+      </gml:LineString>
+    </georss:where>
+    </tal:b>
+    <tal:b condition="view/hasPolygon">
+    <georss:where>
+      <gml:Polygon>
+        <gml:exterior>
+          <gml:LinearRing>
+            <gml:posList tal:content="view/coords_georss">COORDS</gml:posList>
+          </gml:LinearRing>
+        </gml:exterior>
+      </gml:Polygon> 
+    </georss:where>
+    </tal:b>
+</entry>

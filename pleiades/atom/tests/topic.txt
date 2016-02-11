@@ -1,6 +1,8 @@
-Test serialization of PlaceContainer to KML
-===========================================
-    
+Test serialization of Topic to Atom
+===================================
+
+Check the `atom` view of the topic::
+
     >>> from Products.PloneTestCase.setup import portal_owner, default_password
     >>> r = http(r"""
     ... GET /plone/places-topic/@@atom HTTP/1.1
@@ -12,18 +14,13 @@ Test serialization of PlaceContainer to KML
     'application/atom+xml'
     >>> print r.getBody() # doctest: +ELLIPSIS
     <?xml version="1.0" encoding="utf-8"?>
-    <feed xmlns="http://www.w3.org/2005/Atom"
-          xmlns:georss="http://www.georss.org/georss"
-          xmlns:gml="http://www.opengis.net/gml">
+    <feed xmlns="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss" xmlns:gml="http://www.opengis.net/gml">
     <BLANKLINE>
     <BLANKLINE>
       <title></title>
-      <link href="http://localhost/plone/places-topic/@@atom"
-            type="application/atom+xml" rel="self"/>
-      <link href="http://localhost/plone/places-topic"
-            type="text/html" rel="alternate"/>
-      <link href="None" type="application/atom+xml"
-            rel="previous-archive"/>
+      <link href="http://localhost/plone/places-topic/@@atom" type="application/atom+xml" rel="self"/>
+      <link href="http://localhost/plone/places-topic" type="text/html" rel="alternate"/>
+      <link href="None" type="application/atom+xml" rel="previous-archive"/>
     <BLANKLINE>
       <updated>20...Z</updated>
       <author>
@@ -35,8 +32,7 @@ Test serialization of PlaceContainer to KML
     <BLANKLINE>
       <entry>
         <title>Ninoe</title>
-        <link href="http://localhost/plone/places/1"
-              type="text/html" rel="alternate"/>
+        <link href="http://localhost/plone/places/1" type="text/html" rel="alternate"/>
         <id>tag:atlantides.org,...</id>
         <updated>20...Z</updated>
         <summary></summary>
@@ -52,8 +48,7 @@ Test serialization of PlaceContainer to KML
       </entry>
       <entry>
         <title>Ninoe</title>
-        <link href="http://localhost/plone/places/2"
-              type="text/html" rel="alternate"/>
+        <link href="http://localhost/plone/places/2" type="text/html" rel="alternate"/>
         <id>tag:atlantides.org,...</id>
         <updated>20...Z</updated>
         <summary></summary>
@@ -69,8 +64,7 @@ Test serialization of PlaceContainer to KML
       </entry>
       <entry>
         <title>Ninoe</title>
-        <link href="http://localhost/plone/places/3"
-              type="text/html" rel="alternate"/>
+        <link href="http://localhost/plone/places/3" type="text/html" rel="alternate"/>
         <id>tag:atlantides.org,...</id>
         <updated>20...Z</updated>
         <summary></summary>
@@ -86,6 +80,85 @@ Test serialization of PlaceContainer to KML
             </gml:exterior>
           </gml:Polygon>
         </georss:where>
+    <BLANKLINE>
+      </entry>
+    <BLANKLINE>
+    </feed>
+    <BLANKLINE>
+    <BLANKLINE>
+    <BLANKLINE>
+
+(Note: following test was moved here from zgeo.plone.atom)
+
+Make a topic in our folder
+
+    >>> self.setRoles(('Manager',))
+
+    >>> folder = self.folder
+    >>> oid = self.folder.invokeFactory('Topic', 'topic', title='Test')
+    >>> topic = self.folder[oid]
+    >>> c = topic.addCriterion('getId', 'ATSimpleStringCriterion')
+    >>> c.setValue('doc')
+
+Add geo-referenced content
+
+    >>> oid = self.folder.invokeFactory('Document', 'doc', title='A Document', description='A test document')
+    >>> doc = self.folder[oid]
+    >>> from collective.geo.geographer.interfaces import IWriteGeoreferenced
+    >>> geo = IWriteGeoreferenced(doc)
+    >>> geo.setGeoInterface('Point', (-105, 40))
+
+Check the topic
+
+    >>> brain = [b for b in topic.queryCatalog() if b.id == 'doc'][0]
+    >>> brain.zgeo_geometry['type']
+    'Point'
+    >>> brain.zgeo_geometry['coordinates']
+    (-105, 40)
+
+Test the KML document view of the topic
+
+    >>> from Products.PloneTestCase.setup import portal_owner, default_password
+    >>> r = http(r"""
+    ... GET /plone/Members/test_user_1_/topic/@@atom-syndication-feed HTTP/1.1
+    ... Authorization: Basic %s:%s
+    ... """ % (portal_owner, default_password), handle_errors=False)
+    >>> r.getStatus()
+    200
+    >>> r.getHeader('Content-Type')
+    'application/atom+xml'
+    >>> print r.getBody()
+    <?xml version="1.0" encoding="utf-8"?>
+    <feed xmlns="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss" xmlns:gml="http://www.opengis.net/gml">
+    <BLANKLINE>
+      <title>Test</title>
+      <link href="http://localhost/plone/Members/test_user_1_/topic/@@atom-syndication-feed" type="application/atom+xml" rel="self"/>
+      <link href="http://localhost/plone/Members/test_user_1_/topic" type="text/html" rel="alternate"/>
+      <link href="None" type="application/atom+xml" rel="previous-archive"/>
+    <BLANKLINE>
+    <BLANKLINE>
+      <updated>200...Z</updated>
+      <author>
+        <name>test_user_1_</name>
+        <uri></uri>
+        <email></email>
+      </author>
+      <id>urn:uuid:...</id>
+    <BLANKLINE>
+      <entry>
+        <title>A Document</title>
+        <link href="http://localhost/plone/portal_catalog" type="text/html" rel="alternate"/>
+        <id>urn:uuid:...</id>
+        <updated>200...Z</updated>
+        <summary>A test document</summary>
+    <BLANKLINE>
+        <georss:where>
+          <gml:Point>
+            <gml:pos>40.000000 -105.000000</gml:pos>
+          </gml:Point>
+        </georss:where>
+    <BLANKLINE>
+    <BLANKLINE>
     <BLANKLINE>
       </entry>
     <BLANKLINE>

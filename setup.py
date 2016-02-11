@@ -26,8 +26,9 @@ setup(name='pleiades.atom',
       zip_safe=False,
       install_requires=[
           'setuptools',
+          'collective.geo.geographer',
+          'zope.datetime',
           'zope.dublincore',
-          'zgeo.plone.atom'
           ],
       tests_require=[
           'pleiades.workspace'
