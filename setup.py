@@ -26,7 +26,7 @@ setup(name='pleiades.atom',
       zip_safe=False,
       install_requires=[
           'setuptools',
-          'collective.geo.geographer',
+          'pleiades.geographer',
           'zope.datetime',
           'zope.dublincore',
           ],

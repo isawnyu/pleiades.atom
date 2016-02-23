@@ -104,6 +104,9 @@ Add geo-referenced content
 
     >>> oid = self.folder.invokeFactory('Document', 'doc', title='A Document', description='A test document')
     >>> doc = self.folder[oid]
+    >>> from zope.interface import alsoProvides
+    >>> from collective.geo.geographer.interfaces import IGeoreferenceable
+    >>> alsoProvides(doc, IGeoreferenceable)
     >>> from collective.geo.geographer.interfaces import IWriteGeoreferenced
     >>> geo = IWriteGeoreferenced(doc)
     >>> geo.setGeoInterface('Point', (-105, 40))
@@ -137,7 +140,7 @@ Test the KML document view of the topic
       <link href="None" type="application/atom+xml" rel="previous-archive"/>
     <BLANKLINE>
     <BLANKLINE>
-      <updated>200...Z</updated>
+      <updated>20...Z</updated>
       <author>
         <name>test_user_1_</name>
         <uri></uri>
@@ -147,9 +150,9 @@ Test the KML document view of the topic
     <BLANKLINE>
       <entry>
         <title>A Document</title>
-        <link href="http://localhost/plone/portal_catalog" type="text/html" rel="alternate"/>
+        <link href="http://localhost/plone/Members/test_user_1_/doc" type="text/html" rel="alternate"/>
         <id>urn:uuid:...</id>
-        <updated>200...Z</updated>
+        <updated>20...Z</updated>
         <summary>A test document</summary>
     <BLANKLINE>
         <georss:where>

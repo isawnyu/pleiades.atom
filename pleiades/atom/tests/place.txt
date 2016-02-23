@@ -12,18 +12,13 @@ Test serialization of PlaceContainer to KML
     'application/atom+xml'
     >>> print r.getBody() # doctest: +ELLIPSIS
     <?xml version="1.0" encoding="utf-8"?>
-    <feed xmlns="http://www.w3.org/2005/Atom"
-          xmlns:georss="http://www.georss.org/georss"
-          xmlns:gml="http://www.opengis.net/gml">
+    <feed xmlns="http://www.w3.org/2005/Atom" xmlns:georss="http://www.georss.org/georss" xmlns:gml="http://www.opengis.net/gml">
     <BLANKLINE>
     <BLANKLINE>
       <title>Ninoe</title>
-      <link href="http://localhost/plone/places/1/@@atom"
-            type="application/atom+xml" rel="self"/>
-      <link href="http://localhost/plone/places/1"
-            type="text/html" rel="alternate"/>
-      <link href="None" type="application/atom+xml"
-            rel="previous-archive"/>
+      <link href="http://localhost/plone/places/1/@@atom" type="application/atom+xml" rel="self"/>
+      <link href="http://localhost/plone/places/1" type="text/html" rel="alternate"/>
+      <link href="None" type="application/atom+xml" rel="previous-archive"/>
     <BLANKLINE>
       <updated>20...Z</updated>
       <author>
@@ -35,8 +30,7 @@ Test serialization of PlaceContainer to KML
     <BLANKLINE>
       <entry>
         <title>Ninoe</title>
-        <link href="http://localhost/plone/places/1"
-              type="text/html" rel="alternate"/>
+        <link href="http://localhost/plone/places/1" type="text/html" rel="alternate"/>
         <id>tag:atlantides.org,20...</id>
         <updated>20...</updated>
         <summary></summary>
@@ -52,8 +46,7 @@ Test serialization of PlaceContainer to KML
       </entry>
       <entry>
         <title>Ninoe</title>
-        <link href="http://localhost/plone/features/1"
-              type="text/html" rel="alternate"/>
+        <link href="http://localhost/plone/features/1" type="text/html" rel="alternate"/>
         <id>tag:atlantides.org,...</id>
         <updated>20...Z</updated>
         <summary></summary>

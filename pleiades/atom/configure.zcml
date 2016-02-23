@@ -4,6 +4,8 @@
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="pleiades.atom">
 
+  <include package="pleiades.geographer" />
+
   <browser:page
     for="*"
     name="atom-link-entry"

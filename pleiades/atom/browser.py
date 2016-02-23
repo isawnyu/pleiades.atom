@@ -524,7 +524,7 @@ class PlaceArchiveFeed(Tagged, FeedBase):
             )
         catalog = getToolByName(context, 'portal_catalog')
         brains = catalog.searchResults(search_filter)
-        batch = Batch(
+        batch = Batch.fromPagenumber(
             items=brains, pagesize=2000,
             pagenumber=self.pagenum, navlistsize=5)
         return batch
